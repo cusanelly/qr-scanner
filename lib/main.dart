@@ -12,10 +12,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      darkTheme: ThemeData(useMaterial3: true),
       title: "QR code scanner.",
       debugShowMaterialGrid: false,
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
@@ -31,32 +32,31 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("QR Code Scanner - Generator."),
-        backgroundColor: Colors.blue,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const QrCodeScanner()));
-              });
-            },
-            child: const Text("Scan QR Code."),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const QrCodeGenerate()));
-              });
-            },
-            child: const Text("Generate QR Code."),
-          )
-        ],
+      appBar: AppBar(title: const Text("QR Code Scanner - Generator.")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const QrCodeScanner()));
+                });
+              },
+              child: const Text("Scan QR Code."),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const QrCodeGenerate()));
+                });
+              },
+              child: const Text("Generate QR Code."),
+            )
+          ],
+        ),
       ),
     );
   }
