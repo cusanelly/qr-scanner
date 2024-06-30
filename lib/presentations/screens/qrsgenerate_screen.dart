@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrCodeGenerate extends StatefulWidget {
@@ -38,10 +39,17 @@ class _QrCodeGenerateState extends State<QrCodeGenerate> {
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
-                    onPressed: () {}, child: const Text("Generate QR code"))
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: const Text("Generate QR code"))
               ],
             ),
           ),
         ));
+  }
+
+  Future<void> generateQrCode() async {
+    try {} on PlatformException {}
   }
 }

@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class QrCodeScanner extends StatefulWidget {
   const QrCodeScanner({super.key});
@@ -22,10 +24,7 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
             const SizedBox(
               height: 30,
             ),
-            Text(
-              qrResult,
-              style: const TextStyle(color: Colors.black),
-            ),
+            checkLink(),
             const SizedBox(
               height: 30,
             ),
@@ -48,5 +47,24 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
     } on PlatformException {
       qrResult = "Fail to read QR code.";
     }
+  }
+
+  Widget checkLink() {
+    InkWell urlWidget;
+    if (qrResult.startsWith("https") || qrResult.startsWith("https")) {
+      urlWidget = InkWell(
+        onTap: () => launchUrl(Uri.parse(qrResult)),
+        child: Text(qrResult, style: const TextStyle(color: Colors.blueAccent)),
+      );
+    } else {
+      urlWidget = InkWell(
+        child: Text(
+          qrResult,
+          style: const TextStyle(color: Colors.black),
+        ),
+      );
+    }
+
+    return urlWidget;
   }
 }
